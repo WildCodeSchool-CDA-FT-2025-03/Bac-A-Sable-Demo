@@ -27,6 +27,7 @@ repos.get("/:reposid", (req: Request, res: Response) => {
 });
 
 repos.post("/", (req, res) => {
+  console.log(req.body);
   res.status(200).send("Tout est ok pour ajouter");
 });
 

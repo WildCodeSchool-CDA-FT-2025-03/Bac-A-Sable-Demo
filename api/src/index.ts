@@ -6,6 +6,9 @@ const app = express();
 
 const port = process.env.EXPRESS_SERVER_PORT || 3000;
 
+// Active le décodage du body au format JSON
+app.use(express.json());
+
 app.use("/api", router);
 
 app.listen(port, () => {
