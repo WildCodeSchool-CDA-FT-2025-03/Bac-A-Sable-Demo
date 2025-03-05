@@ -27,8 +27,9 @@ repos.get("/:reposid", (req: Request, res: Response) => {
 });
 
 repos.post("/", (req, res) => {
-  console.log(req.body);
-  res.status(200).send("Tout est ok pour ajouter");
+  const newId = Math.ceil(Math.random() * 100000).toString();
+  data.push({ ...req.body, id: newId });
+  res.status(201).json({ id: newId });
 });
 
 export default repos;

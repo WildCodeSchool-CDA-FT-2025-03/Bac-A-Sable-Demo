@@ -1,0 +1,24 @@
+meta {
+  name: All repos
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/repos?url=https://github.com/jujuck?tab=repositories
+  body: json
+  auth: none
+}
+
+params:query {
+  url: https://github.com/jujuck?tab=repositories
+  : 
+}
+
+body:json {
+    {
+      "isPrivate": false,
+      "languages": [{ "size": 00001, "node": { "name": "HTML" } }],
+      "url": "https://github.com/jujuck/toto"
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "App repos Github",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
