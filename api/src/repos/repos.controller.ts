@@ -1,5 +1,6 @@
-import express, { Response } from "express";
+import express, { Response, Request } from "express";
 import data from "../../data.json";
+import { Repos } from "./repos.type";
 
 const repos = express.Router();
 
@@ -15,8 +16,13 @@ repos.get("/", (_, res: Response) => {
  * Route Get pour récupérer un repos via son id
  * /api/repos/dujen_deodei
  */
-repos.get("/:reposid", (req, res) => {
-  const repo = data.find((rep) => rep.id === req.params.reposid);
-  res.status(200).json(repo);
+repos.get("/:reposid", (req: Request, res: Response) => {
+  const repo = data.find((rep) => rep.id === req.params.reposid) as Repos;
+
+  if (repo) {
+    res.status(200).json(repo);
+  } else {
+    res.sendStatus(404);
+  }
 });
 export default repos;
