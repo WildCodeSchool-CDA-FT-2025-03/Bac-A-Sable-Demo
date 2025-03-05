@@ -25,4 +25,9 @@ repos.get("/:reposid", (req: Request, res: Response) => {
     res.sendStatus(404);
   }
 });
+
+repos.post("/", (req, res) => {
+  res.status(200).send("Tout est ok pour ajouter");
+});
+
 export default repos;
