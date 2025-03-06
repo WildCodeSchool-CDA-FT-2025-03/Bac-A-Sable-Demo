@@ -5,4 +5,5 @@ export type Repos = {
   isPrivate: boolean;
   url: string;
   languages: Languages[];
+  [key: string]: any;
 };
