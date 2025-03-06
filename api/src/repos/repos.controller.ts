@@ -13,9 +13,14 @@ repos.get("/", (req: Request, res: Response) => {
   console.log("Hit all repo controller");
   console.log(req.query);
 
-  const result = req.query.isPrivate
+  // Select * from repos where isPrivate = ?, [req.query.isPrivate]
+  let result = req.query.isPrivate
     ? data.filter((rep) => rep.isPrivate.toString() === req.query.isPrivate)
     : data;
+
+  if (req.query.limit) {
+    result = result.slice(0, +req.query.limit);
+  }
   res.status(200).json(result);
 });
 
