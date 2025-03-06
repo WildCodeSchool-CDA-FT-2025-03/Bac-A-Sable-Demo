@@ -10,6 +10,13 @@
 - utiliser un middleware pour vérifier la validité des données
 - reviser body, payload
 
+## Live@express_Query
+
+- Découvrir les querys params
+- Cas du filtre de recherche
+- Cas de la pagination
+- Pour aller plus loin
+
 ## Doc api
 
 /api/repos
