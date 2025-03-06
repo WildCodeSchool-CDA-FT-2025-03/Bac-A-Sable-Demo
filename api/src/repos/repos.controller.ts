@@ -1,9 +1,10 @@
 import express, { Response, Request } from "express";
 import { validateRepo } from "./repos.validation";
-import data from "../../data.json";
+import data from "../../data.json"; // const data = []
 import { Repos } from "./repos.type";
 
 const repos = express.Router();
+let reposState = data;
 
 type Fields = "id" | "url" | "languages" | "isPrivate";
 
@@ -17,8 +18,10 @@ repos.get("/", (req: Request, res: Response) => {
 
   // Select * from repos where isPrivate = ?, [req.query.isPrivate]
   let result = req.query.isPrivate
-    ? data.filter((rep) => rep.isPrivate.toString() === req.query.isPrivate)
-    : data;
+    ? reposState.filter(
+        (rep) => rep.isPrivate.toString() === req.query.isPrivate
+      )
+    : reposState;
 
   if (req.query.limit && result.length > +req.query.limit) {
     result = result.slice(0, +req.query.limit);
@@ -27,7 +30,7 @@ repos.get("/", (req: Request, res: Response) => {
   if (req.query.fields) {
     const fields =
       typeof req.query.fields === "string" ? req.query.fields.split(",") : [];
-    console.log(fields);
+
     // Retourner un tableau
     // Pour chaque élément, ne garder que les clés voulues
     result = result.map((el: Repos) => {
@@ -55,7 +58,7 @@ acc = { "id": "dejenzencor" }, field = "url" => { "id": "dejenzencor", "url": "h
  * /api/repos/dujen_deodei
  */
 repos.get("/:reposid", (req: Request, res: Response) => {
-  const repo = data.find((rep) => rep.id === req.params.reposid) as Repos;
+  const repo = reposState.find((rep) => rep.id === req.params.reposid) as Repos;
 
   if (repo) {
     res.status(200).json(repo);
@@ -66,8 +69,13 @@ repos.get("/:reposid", (req: Request, res: Response) => {
 
 repos.post("/", validateRepo, (req: Request, res: Response) => {
   const newId = Math.ceil(Math.random() * 100000).toString();
-  data.push({ ...req.body, id: newId });
+  reposState.push({ ...req.body, id: newId });
   res.status(201).json({ id: newId });
+});
+
+repos.delete("/:reposId", (req: Request, res: Response) => {
+  reposState = reposState.filter((repo) => repo.id !== req.params.reposId);
+  res.sendStatus(204);
 });
 
 export default repos;
