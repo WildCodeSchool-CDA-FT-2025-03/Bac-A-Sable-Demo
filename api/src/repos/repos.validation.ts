@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
+import logger from "../services/logger";
 
 const schema = Joi.object({
   url: Joi.string().required(),
@@ -18,6 +19,9 @@ const validateRepo = (req: Request, res: Response, next: NextFunction) => {
   const { error } = schema.validate(req.body);
 
   if (error) {
+    logger.error({
+      error: { msg: `Validation Repo, ${error.details[0].message}` },
+    });
     res.status(422).json(error);
   } else {
     next();

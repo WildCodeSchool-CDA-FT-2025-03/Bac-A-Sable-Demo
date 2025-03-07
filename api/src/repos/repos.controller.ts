@@ -2,6 +2,7 @@ import express, { Response, Request } from "express";
 import { validateRepo } from "./repos.validation";
 import data from "../../data.json"; // const data = []
 import { Repos } from "./repos.type";
+import logger from "../services/logger";
 
 const repos = express.Router();
 let reposState = data;
@@ -74,8 +75,19 @@ repos.post("/", validateRepo, (req: Request, res: Response) => {
 });
 
 repos.delete("/:reposId", (req: Request, res: Response) => {
-  reposState = reposState.filter((repo) => repo.id !== req.params.reposId);
-  res.sendStatus(204);
+  // Req.params.id => 455
+  if (reposState.some((repo) => repo.id === req.params.id)) {
+    reposState = reposState.filter((repo) => repo.id !== req.params.reposId);
+    res.sendStatus(204);
+  } else {
+    // console.log({
+    //   error: { msg: `Route delete, id not found, ${req.params.reposId}` },
+    // });
+    logger.error({
+      error: { msg: `Route delete, id not found, ${req.params.reposId}` },
+    });
+    res.sendStatus(404);
+  }
 });
 
 /*** Sécurité métiers */
