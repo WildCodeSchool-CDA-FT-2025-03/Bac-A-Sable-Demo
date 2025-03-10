@@ -1,4 +1,5 @@
 import useRepos from "./services/useRepos";
+import RepoCard from "./components/RepoCard";
 import "./App.css";
 
 function App() {
@@ -7,7 +8,11 @@ function App() {
   return (
     <>
       <h1>Mon titre</h1>
-      {data.length > 0 && <h2>{data[0].url}</h2>}
+      {data.map((repo, index) => (
+        <RepoCard repo={repo} cls={index % 2 === 0 ? "red" : "blue"}>
+          <span>Children Element</span>
+        </RepoCard>
+      ))}
     </>
   );
 }
