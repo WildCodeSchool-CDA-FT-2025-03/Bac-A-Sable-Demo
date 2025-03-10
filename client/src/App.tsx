@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
-import { Repos } from "./types/repos.type";
-import client from "./services/client";
+import useRepos from "./services/useRepos";
 import "./App.css";
 
 function App() {
-  const [data, setData] = useState<Repos[]>([]);
-
-  useEffect(() => {
-    client
-      .get("/repos")
-      .then((repos) => {
-        setData(repos.data as Repos[]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data } = useRepos();
 
   return (
     <>
