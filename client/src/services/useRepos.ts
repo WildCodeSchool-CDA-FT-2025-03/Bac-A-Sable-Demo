@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import client from "./client";
 import type { Repos } from "../types/repos.type";
 
@@ -6,9 +6,9 @@ const useRepos = () => {
   const [data, setData] = useState<Repos[]>([]);
   const [oneRepos, setOneRepos] = useState<Repos>();
 
-  const getAllRepos = () => {
+  const getAllRepos = (limit: string) => {
     client
-      .get("/repos")
+      .get(`/repos?limit=${limit}`)
       .then((repos) => {
         setData(repos.data as Repos[]);
       })
@@ -28,11 +28,7 @@ const useRepos = () => {
       });
   };
 
-  useEffect(() => {
-    getAllRepos();
-  }, []);
-
-  return { data, oneRepos, getOneRepos };
+  return { data, oneRepos, getOneRepos, getAllRepos };
 };
 
 export default useRepos;

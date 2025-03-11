@@ -8,7 +8,8 @@ export default function RepoPage() {
 
   useEffect(() => {
     getOneRepos(id as string);
-  }, [id, getOneRepos]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   return (
     <div>
