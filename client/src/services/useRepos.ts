@@ -5,6 +5,7 @@ import type { Repos } from "../types/repos.type";
 const useRepos = () => {
   const [data, setData] = useState<Repos[]>([]);
   const [oneRepos, setOneRepos] = useState<Repos>();
+  const [error, setError] = useState(false);
 
   const getAllRepos = (limit: string) => {
     client
@@ -24,11 +25,12 @@ const useRepos = () => {
         setOneRepos(repos.data as Repos);
       })
       .catch((error) => {
+        setError(true);
         console.error(error);
       });
   };
 
-  return { data, oneRepos, getOneRepos, getAllRepos };
+  return { data, oneRepos, getOneRepos, getAllRepos, error };
 };
 
 export default useRepos;
