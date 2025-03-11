@@ -1,20 +1,18 @@
-import useRepos from "./services/useRepos";
-import RepoCard from "./components/RepoCard";
 import "./App.css";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const { data } = useRepos();
-
-  return (
-    <>
-      <h1>Mon titre</h1>
-      {data.map((repo, index) => (
-        <RepoCard repo={repo} cls={index % 2 === 0 ? "red" : "blue"}>
-          <span>Children Element</span>
-        </RepoCard>
-      ))}
-    </>
-  );
+  const user = "admin";
+  if (user === "admin") {
+    return (
+      <>
+        <header>BANDEAU DE NAVIGATION</header>
+        <Outlet />
+        <footer>BANDEAU DE PIED DE PAGE</footer>
+      </>
+    );
+  }
+  return <p>Not allowed</p>;
 }
 
 export default App;
