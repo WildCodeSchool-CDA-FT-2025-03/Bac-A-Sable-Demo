@@ -13,6 +13,8 @@ const schema = Joi.object({
       }),
     })
   ),
+  name: Joi.string().required(),
+  description: Joi.string().required(),
 });
 
 const validateRepo = (req: Request, res: Response, next: NextFunction) => {

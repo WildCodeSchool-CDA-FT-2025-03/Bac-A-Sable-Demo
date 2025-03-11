@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "getRepo": "gh repo list jujuck --json id,isPrivate,url,languages > ./data.json",
+    "getRepo": "gh repo list jujuck --json id,isPrivate,url,languages,name,description > ./data.json",
     "dev": "ts-node-dev ./src/index.ts"
   },
   "author": "",
