@@ -7,8 +7,8 @@ import Home from "./pages/Home.tsx";
 import App from "./App.tsx";
 import FAQ from "./pages/FAQ.tsx";
 import RepoPage from "./pages/RepoPage.tsx";
-
-import client from "./services/client.ts";
+import RepoForm from "./pages/RepoForm.tsx";
+// import client from "./services/client.ts";
 
 import "./index.css";
 
@@ -20,15 +20,19 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
-        loader: async () => {
-          const result = await client.get("/repos");
-          console.log("Result", result);
-          return result;
-        },
+        // loader: async () => {
+        //   const result = await client.get("/repos");
+        //   console.log("Result", result);
+        //   return result;
+        // },
       },
       {
         path: "/repos/:id",
         element: <RepoPage />,
+      },
+      {
+        path: "/repos/create",
+        element: <RepoForm />,
       },
       {
         path: "/faq",
