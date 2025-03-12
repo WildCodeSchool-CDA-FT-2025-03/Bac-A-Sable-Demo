@@ -1,10 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, forwardRef } from "react";
 import useLanguages from "../../services/useLanguages";
 
-type SelectFormLanguagesProps = {
-  ref: React.RefObject<HTMLSelectElement>;
-};
-function SelectFormLanguages({ ref }: SelectFormLanguagesProps) {
+const SelectFormLanguages = forwardRef<HTMLSelectElement>((_, ref) => {
   const { languages, getAllLanguages } = useLanguages();
 
   useEffect(() => {
@@ -22,6 +19,6 @@ function SelectFormLanguages({ ref }: SelectFormLanguagesProps) {
       </select>
     </label>
   );
-}
+});
 
 export default SelectFormLanguages;
