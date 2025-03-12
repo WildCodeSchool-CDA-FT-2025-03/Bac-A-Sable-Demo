@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Repos } from "../types/repos.type";
 import InputForm from "../components/forms/InputForm";
-import useLanguages from "../services/useLanguages";
+import SelectFormLanguages from "../components/forms/SelectFormLanguages";
 
 /**
  *
@@ -34,19 +34,21 @@ const initialRepo = {
 
 function RepoForm() {
   const [newRepo, setNewRepo] = useState<Repos>(initialRepo);
-  const { languages, getAllLanguages } = useLanguages();
-  console.log(newRepo);
 
-  const handleNewRepo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewRepo(() => ({ ...newRepo, [e.target.name]: e.target.value }));
+  const handleNewRepo = (
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (e.target.name === "languages") {
+      setNewRepo(() => ({
+        ...newRepo,
+        languages: [{ size: 0, node: { name: e.target.value } }],
+      }));
+    } else {
+      setNewRepo(() => ({ ...newRepo, [e.target.name]: e.target.value }));
+    }
   };
 
-  useEffect(() => {
-    getAllLanguages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(languages);
+  console.log(newRepo);
   return (
     <form className="container">
       <h1 className="text-center">Ajout d'un repo</h1>
@@ -68,14 +70,10 @@ function RepoForm() {
         title="Url du repo"
         name="url"
       />
-      <label htmlFor="">
-        Choix du languages
-        <select name="" id="">
-          {languages.map((lg) => (
-            <option value={lg}>{lg}</option>
-          ))}
-        </select>
-      </label>
+      <SelectFormLanguages
+        handleNewRepo={handleNewRepo}
+        value={newRepo.languages[0].node.name}
+      />
     </form>
   );
 }
