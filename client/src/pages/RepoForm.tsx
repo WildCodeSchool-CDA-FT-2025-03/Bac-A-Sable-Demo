@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Repos } from "../types/repos.type";
+import InputForm from "../components/forms/InputForm";
 
 /**
  *
@@ -41,24 +42,24 @@ function RepoForm() {
   return (
     <form className="container">
       <h1 className="text-center">Ajout d'un repo</h1>
-      <label>
-        Nom du repo
-        <input
-          type="text"
-          name="name"
-          value={newRepo.name}
-          onChange={handleNewRepo}
-        />
-      </label>
-      <label>
-        Description
-        <input
-          type="text"
-          name="description"
-          value={newRepo.description}
-          onChange={handleNewRepo}
-        />
-      </label>
+      <InputForm
+        handleNewRepo={handleNewRepo}
+        value={newRepo.name}
+        title="Titre du repo"
+        name="name"
+      />
+      <InputForm
+        handleNewRepo={handleNewRepo}
+        value={newRepo.description}
+        title="Description du repo"
+        name="description"
+      />
+      <InputForm
+        handleNewRepo={handleNewRepo}
+        value={newRepo.url}
+        title="Url du repo"
+        name="url"
+      />
     </form>
   );
 }
