@@ -2,13 +2,9 @@ import { useEffect } from "react";
 import useLanguages from "../../services/useLanguages";
 
 type SelectFormLanguagesProps = {
-  value: string;
-  handleNewRepo: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  ref: React.RefObject<HTMLSelectElement>;
 };
-function SelectFormLanguages({
-  value,
-  handleNewRepo,
-}: SelectFormLanguagesProps) {
+function SelectFormLanguages({ ref }: SelectFormLanguagesProps) {
   const { languages, getAllLanguages } = useLanguages();
 
   useEffect(() => {
@@ -19,7 +15,7 @@ function SelectFormLanguages({
   return (
     <label htmlFor="">
       Choix du languages
-      <select name="languages" value={value} onChange={handleNewRepo} required>
+      <select name="languages" ref={ref} required>
         {languages.map((lg) => (
           <option value={lg}>{lg}</option>
         ))}

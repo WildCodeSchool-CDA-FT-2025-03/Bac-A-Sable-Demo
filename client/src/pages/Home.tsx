@@ -9,8 +9,7 @@ function Home() {
 
   useEffect(() => {
     getAllRepos(searchParams.get("limit") || "10");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [searchParams, getAllRepos]);
 
   return (
     <>

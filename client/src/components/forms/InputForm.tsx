@@ -1,23 +1,16 @@
 import React from "react";
 
 type InputFormProps = {
-  value: string;
   name: string;
   title: string;
-  handleNewRepo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  ref?: React.RefObject<HTMLInputElement>;
 };
 
-function InputForm({ handleNewRepo, value, name, title }: InputFormProps) {
+function InputForm({ name, title, ref }: InputFormProps) {
   return (
     <label>
       {title}
-      <input
-        type="text"
-        name={name}
-        value={value}
-        onChange={handleNewRepo}
-        required
-      />
+      <input type="text" name={name} ref={ref} required />
     </label>
   );
 }

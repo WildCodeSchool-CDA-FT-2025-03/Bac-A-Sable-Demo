@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import client from "./client";
 import type { Repos } from "../types/repos.type";
 
@@ -7,7 +7,7 @@ const useRepos = () => {
   const [oneRepos, setOneRepos] = useState<Repos>();
   const [error, setError] = useState(false);
 
-  const getAllRepos = (limit: string) => {
+  const getAllRepos = useCallback((limit: string) => {
     client
       .get(`/repos?limit=${limit}`)
       .then((repos) => {
@@ -16,7 +16,7 @@ const useRepos = () => {
       .catch((error) => {
         console.error(error);
       });
-  };
+  }, []);
 
   const getOneRepos = (id: string) => {
     client
