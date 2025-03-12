@@ -36,7 +36,9 @@ function RepoForm() {
   const [newRepo, setNewRepo] = useState<Repos>(initialRepo);
 
   const handleNewRepo = (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ) => {
     if (e.target.name === "languages") {
       setNewRepo(() => ({
