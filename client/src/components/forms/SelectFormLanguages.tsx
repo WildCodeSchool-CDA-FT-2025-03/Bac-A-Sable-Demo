@@ -19,7 +19,7 @@ function SelectFormLanguages({
   return (
     <label htmlFor="">
       Choix du languages
-      <select name="languages" value={value} onChange={handleNewRepo}>
+      <select name="languages" value={value} onChange={handleNewRepo} required>
         {languages.map((lg) => (
           <option value={lg}>{lg}</option>
         ))}

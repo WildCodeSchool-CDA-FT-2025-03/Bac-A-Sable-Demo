@@ -11,7 +11,13 @@ function InputForm({ handleNewRepo, value, name, title }: InputFormProps) {
   return (
     <label>
       {title}
-      <input type="text" name={name} value={value} onChange={handleNewRepo} />
+      <input
+        type="text"
+        name={name}
+        value={value}
+        onChange={handleNewRepo}
+        required
+      />
     </label>
   );
 }

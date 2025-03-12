@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Repos } from "../types/repos.type";
 import InputForm from "../components/forms/InputForm";
 import SelectFormLanguages from "../components/forms/SelectFormLanguages";
+import useRepos from "../services/useRepos";
 
 /**
  *
@@ -34,6 +35,7 @@ const initialRepo = {
 
 function RepoForm() {
   const [newRepo, setNewRepo] = useState<Repos>(initialRepo);
+  const { addNewRepo } = useRepos();
 
   const handleNewRepo = (
     e:
@@ -41,8 +43,8 @@ function RepoForm() {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     if (e.target.name === "languages") {
-      setNewRepo(() => ({
-        ...newRepo,
+      setNewRepo((prev) => ({
+        ...prev,
         languages: [{ size: 0, node: { name: e.target.value } }],
       }));
     } else if (e.target.name === "isPrivate") {
@@ -50,10 +52,24 @@ function RepoForm() {
     } else {
       setNewRepo(() => ({ ...newRepo, [e.target.name]: e.target.value }));
     }
+    console.log("new Repos", newRepo);
+    console.log(e.target.name, e.target.value);
+  };
+
+  const handleSubmitRepo = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      console.log(newRepo);
+      await addNewRepo(newRepo);
+      setNewRepo(initialRepo);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form className="container">
+    <form className="container" onSubmit={handleSubmitRepo}>
       <h1 className="text-center">Ajout d'un repo</h1>
       <InputForm
         handleNewRepo={handleNewRepo}
@@ -85,8 +101,10 @@ function RepoForm() {
           className={newRepo.isPrivate ? "red" : "blue"}
           checked={newRepo.isPrivate}
           onChange={handleNewRepo}
+          required
         />
       </label>
+      <button type="submit">Ajouter</button>
     </form>
   );
 }
