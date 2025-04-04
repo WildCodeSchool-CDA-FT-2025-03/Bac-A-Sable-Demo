@@ -28,7 +28,11 @@ function Home() {
       </label>
       <main>
         {data.map((repo, index) => (
-          <RepoCard repo={repo} cls={index % 2 === 0 ? "red" : "blue"}>
+          <RepoCard
+            repo={repo}
+            cls={index % 2 === 0 ? "red" : "blue"}
+            key={repo.id}
+          >
             <span>N° : {index}</span>
           </RepoCard>
         ))}
