@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         // },
       },
       {
-        path: "/repos/:reposid/",
+        path: "/repos/:id/",
         element: <RepoPage />,
       },
       {
