@@ -3,11 +3,7 @@ name: Automatic Deploy on VPS with bash
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+      - test@deploy_with_docker
 
 jobs:
   deploy:
@@ -19,4 +15,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           host: ${{ secrets.SSH_HOST }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: cd deploy && bash ./cda-deploy-with-bash.sh
+          script: cd app && bash ./deploy.sh
