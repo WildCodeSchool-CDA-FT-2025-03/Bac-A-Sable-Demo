@@ -20,7 +20,6 @@ languages.get("/", (req: Request, res: Response) => {
       return acc;
     }, [] as string[]);
 
-    console.log(languages);
     cache.languages = languages;
   }
   res.status(200).json(cache.languages);

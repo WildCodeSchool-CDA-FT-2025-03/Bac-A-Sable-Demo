@@ -1,0 +1,17 @@
+services:
+  api:
+    build: ./api
+    ports:
+      - 3000:3000
+    command: npm run prod
+    restart: always
+    environment:
+      - CLIENT_URL=http://localhost:4173
+      - PORT=4000
+
+  client:
+    build: ./client
+    command: npm run preview
+    restart: always
+    ports:
+      - 4173:4173
