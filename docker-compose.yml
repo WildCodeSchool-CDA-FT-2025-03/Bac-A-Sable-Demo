@@ -2,7 +2,7 @@ services:
   api:
     build: ./api
     ports:
-      - 3000:3000
+      - 4000:4000
     command: npm run prod
     restart: always
     environment:

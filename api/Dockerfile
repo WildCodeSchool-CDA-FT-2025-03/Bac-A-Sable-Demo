@@ -19,7 +19,7 @@ COPY log log
 
 RUN npm run build
 # Exposition sur le réseau machine (serveur) du port pour le rendre accessible à Nginx (Attention, uniformiser vos ports applicatifs, docker et de votre configuration nginx)
-EXPOSE 3000
+EXPOSE 4000
 
 
 CMD ["npm", "run", "prod"]
