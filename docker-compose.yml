@@ -13,5 +13,7 @@ services:
     build: ./client
     command: npm run preview
     restart: always
+    env_file:
+      - ./client/.env
     ports:
       - 4173:4173
