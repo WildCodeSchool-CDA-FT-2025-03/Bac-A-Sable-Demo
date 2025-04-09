@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <>
-      <h1>Mon titre</h1>
+      <h1>Mon titre déployé</h1>
       <label>
         Nombre de repos affichés
         <select
